@@ -37,3 +37,60 @@
   buttons.forEach(b=>b.addEventListener('click',()=>{const f=b.dataset.filter;let n=0;for(const el of items){const show=f==='all'||el.dataset.type===f;el.hidden=!show;if(show)n++;else el.querySelector('video')?.pause()}buttons.forEach(x=>{const active=x===b;x.classList.toggle('selected',active);x.setAttribute('aria-pressed',String(active))});if($('galleryCount'))$('galleryCount').textContent='共 '+n+' 条资料'}))
  }
 })();
+
+
+/* Media archive: restore exact original MP4 bytes from GitHub-safe chunks. */
+(() => {
+  const parts = {
+    "YM视频.mp4": 2,
+    "YX视频.mp4": 3,
+    "YX视频2.mp4": 2,
+    "视频2026-11-19_213352_750.mp4": 2
+  };
+  for (const video of document.querySelectorAll("video")) {
+    const source = video.querySelector("source[src]");
+    if (!source) continue;
+    const path = source.getAttribute("src");
+    const filename = path.split("/").pop();
+    const count = parts[filename];
+    if (!count) continue;
+    source.removeAttribute("src");
+    video.removeAttribute("src");
+    video.preload = "none";
+    video.load();
+    let task;
+    const prepare = () => {
+      if (task) return task;
+      task = Promise.all(Array.from({length: count}, async (_, index) => {
+        const url = "media/chunks/" + encodeURIComponent(filename) + ".part" + index;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("视频片段载入失败: " + response.status);
+        return response.arrayBuffer();
+      })).then(buffers => {
+        video.src = URL.createObjectURL(new Blob(buffers, {type: "video/mp4"}));
+        video.load();
+        return true;
+      }).catch(error => {
+        console.error(error);
+        task = null;
+        video.setAttribute("aria-label", "视频暂时无法载入，请刷新重试");
+        return false;
+      });
+      return task;
+    };
+    video.addEventListener("pointerdown", () => {
+      prepare().then(ok => { if (ok) video.play().catch(() => {}); });
+    }, {once:true});
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting)) {
+          observer.disconnect();
+          prepare();
+        }
+      }, {rootMargin: "320px"});
+      observer.observe(video);
+    } else {
+      prepare();
+    }
+  }
+})();
