@@ -8,7 +8,7 @@
  ['基本性质','波粒二象性与绝对反观测。','index.html#abilities'],
  ['羊母空间异常档案','YM-013：后室失踪报告、模因污染与暗物质假说。','index.html#space-archive'],
  ['零号元素 Ym','Hydrogen 前的一格，四个零。羊母的残骸、虚无与宇宙膨胀。','index.html#element-ym'],
- ['夜间校务记录','羊曦、雾阶寄宿学院、失踪名册与复活计划。','index.html#academy-record'],
+ ['夜间校务记录','羊曦、学校、失踪名册与复活计划。','index.html#academy-record'],
  ['羊母派与羊没派','羊曦的追随者与追查失踪者的羊没派。','index.html#factions'],
  ['相关人物','羊曦 YX、章翰峰、羊父、剑桥爸爸、章鱼哥等在卷人物。','index.html#characters'],
  ['档案员的恶意批注','退稿意见、吐槽、羊曦 YX 的空箱运单、退稿意见与羊母派经费申请。','index.html#annotations'],
