@@ -9,6 +9,7 @@
  ['羊母空间异常档案','YM-013：后室失踪报告、模因污染与暗物质假说。','index.html#space-archive'],
  ['零号元素 Ym','Hydrogen 前的一格，四个零。羊母的残骸、虚无与宇宙膨胀。','index.html#element-ym'],
  ['夜间校务记录','羊曦、学校、失踪名册与复活计划。','index.html#academy-record'],
+ ['值班室副本','白天公示、夜间底稿、失物招领与监控抄录。','index.html#evidence-room'],
  ['羊母派与羊没派','羊曦的追随者与追查失踪者的羊没派。','index.html#factions'],
  ['相关人物','羊曦 YX、章翰峰、羊父、剑桥爸爸、章鱼哥等在卷人物。','index.html#characters'],
  ['档案员的恶意批注','退稿意见、吐槽、羊曦 YX 的空箱运单、退稿意见与羊母派经费申请。','index.html#annotations'],
@@ -52,6 +53,43 @@
  if(buttons.length){
   buttons.forEach(b=>b.addEventListener('click',()=>{const f=b.dataset.filter;let n=0;for(const el of items){const show=f==='all'||el.dataset.type===f;el.hidden=!show;if(show)n++;else el.querySelector('video')?.pause()}buttons.forEach(x=>{const active=x===b;x.classList.toggle('selected',active);x.setAttribute('aria-pressed',String(active))});if($('galleryCount'))$('galleryCount').textContent='共 '+n+' 条资料'}))
  }
+})();
+
+(() => {
+  const register = document.querySelector('[data-register]');
+  if (register) {
+    const buttons = [...register.querySelectorAll('[data-copy-select]')];
+    const copies = [...register.querySelectorAll('[data-copy]')];
+    const showCopy = selected => {
+      copies.forEach(copy => { copy.hidden = copy.dataset.copy !== selected; });
+      buttons.forEach(button => {
+        button.setAttribute('aria-pressed', String(button.dataset.copySelect === selected));
+      });
+    };
+    buttons.forEach(button => button.addEventListener('click', () => showCopy(button.dataset.copySelect)));
+    showCopy('day');
+    register.querySelector('.evidence-controls').hidden = false;
+  }
+
+  const monitor = document.querySelector('[data-monitor]');
+  if (monitor) {
+    const frames = [...monitor.querySelectorAll('[data-monitor-frame]')];
+    const previous = monitor.querySelector('[data-frame-prev]');
+    const next = monitor.querySelector('[data-frame-next]');
+    const number = monitor.querySelector('[data-frame-number]');
+    let frameIndex = 0;
+    const showFrame = index => {
+      frameIndex = index;
+      frames.forEach((frame, i) => { frame.hidden = i !== frameIndex; });
+      previous.disabled = frameIndex === 0;
+      next.disabled = frameIndex === frames.length - 1;
+      number.textContent = `${frameIndex + 1} / ${frames.length}`;
+    };
+    previous.addEventListener('click', () => showFrame(frameIndex - 1));
+    next.addEventListener('click', () => showFrame(frameIndex + 1));
+    showFrame(0);
+    monitor.querySelector('.evidence-controls').hidden = false;
+  }
 })();
 
 

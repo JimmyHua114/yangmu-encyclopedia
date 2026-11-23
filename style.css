@@ -86,3 +86,139 @@
   margin: 0 .25em;
   width: 3.75em;
 }
+
+.space-archive .evidence-entry {
+  margin: -4px 0 14px;
+}
+
+.space-archive a {
+  color: #d5e2b5;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.evidence-room {
+  border-top: 1px solid #505950;
+  padding: 20px 0 24px;
+}
+
+.evidence-room h3 {
+  font-size: 20px;
+  margin: 0 0 6px;
+}
+
+.evidence-paper {
+  background: #f1ead9;
+  border: 1px solid #b9af99;
+  border-radius: 2px;
+  box-shadow: 1px 3px 0 #111810, 6px 8px 13px #11181066;
+  color: #29322d;
+  margin: 18px 0 24px;
+  padding: 16px clamp(13px, 4vw, 25px);
+}
+
+.paper-masthead, .monitor-masthead {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 16px;
+  justify-content: space-between;
+}
+
+.paper-masthead {
+  border-bottom: 2px solid #696a55;
+  font-size: 14px;
+  padding-bottom: 8px;
+}
+
+.paper-copy + .paper-copy {
+  margin-top: 18px;
+}
+
+.paper-copy h4 {
+  font-size: 18px;
+  margin: 12px 0 6px;
+}
+
+.paper-copy dl {
+  margin: 0;
+}
+
+.paper-copy dl div {
+  border-top: 1px solid #bcb8a6;
+  display: grid;
+  gap: 3px 14px;
+  grid-template-columns: 5em minmax(0, 1fr);
+  padding: 8px 0;
+}
+
+.paper-copy dt { font-weight: 700; }
+.paper-copy dd { margin: 0; overflow-wrap: anywhere; }
+
+.space-archive .paper-footnote {
+  border-top: 1px solid #bcb8a6;
+  color: #55584c;
+  font-size: 14px;
+  margin: 0;
+  padding-top: 10px;
+}
+
+.paper-signature {
+  border-bottom: 1px solid currentColor;
+  display: inline-block;
+  width: 3em;
+}
+
+.evidence-controls {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.evidence-controls button {
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  color: inherit;
+  min-height: 42px;
+  padding: 4px 12px;
+}
+
+.paper-controls { margin-top: 12px; }
+.paper-controls button[aria-pressed="true"] { background: #32483d; color: #fff; }
+.evidence-controls button:disabled { cursor: default; opacity: .55; }
+
+.archive-monitor {
+  background: #151c17;
+  border: 1px solid #596452;
+  border-radius: 5px;
+  color: #dceacb;
+  padding: 13px;
+}
+
+.monitor-masthead h4 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.monitor-masthead span, .monitor-frame time, .monitor-controls span {
+  font-family: ui-monospace, monospace;
+}
+
+.monitor-screen {
+  background: repeating-linear-gradient(180deg, #202c2340 0 1px, transparent 1px 4px), #0e150f;
+  border: 1px solid #40513b;
+  margin: 9px 0;
+  padding: 10px 12px;
+}
+
+.monitor-frame { min-height: 6em; padding: 4px 0; }
+.monitor-frame time { margin-right: 1em; }
+.monitor-frame > span { color: #b9cd9b; }
+.space-archive .monitor-frame p { margin: 6px 0 0; }
+.monitor-controls { justify-content: space-between; }
+
+@media (max-width: 440px) {
+  .paper-copy dl div { grid-template-columns: minmax(0, 1fr); }
+}
