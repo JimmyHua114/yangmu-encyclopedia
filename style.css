@@ -238,3 +238,50 @@
 .source-appendix { margin-top: 4px; }
 .source-appendix summary { width: fit-content; color: var(--green); cursor: pointer; }
 .source-appendix p { margin-bottom: 4px; }
+
+.observation-anomaly {
+  width: min(100%, 48rem);
+  height: 100%;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: #080a08;
+  color: #e2ebde;
+}
+
+.observation-anomaly::backdrop { background: #080a08; }
+.observation-anomaly > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.anomaly-controls {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 15px max(16px, env(safe-area-inset-right)) max(15px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  background: #0b110ded;
+}
+
+.anomaly-controls h3 { color: inherit; font-size: 1rem; margin: 0; }
+.anomaly-controls button {
+  min-height: 44px;
+  padding: 6px 14px;
+  border: 1px solid #899f8d;
+  border-radius: 4px;
+  color: inherit;
+  background: #213528;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .observation-anomaly[open] > img { animation: anomaly-closeup .16s ease-out both; }
+  @keyframes anomaly-closeup {
+    from { transform: scale(1.16); }
+    to { transform: scale(1); }
+  }
+}

@@ -55,6 +55,8 @@
  }
  const button=$('observeButton');
  if(button){
+   const anomaly=$('observationAnomaly');
+   const anomalyInterval=13;
    let count=0;
    try{const saved=Number(localStorage.getItem('ym_count')||0);if(Number.isSafeInteger(saved)&&saved>=0)count=saved}catch(_){}
    const display=()=>{if($('observeCount'))$('observeCount').textContent=String(count);if($('withdrawnNote'))$('withdrawnNote').hidden=count<7};
@@ -71,7 +73,20 @@
     '观测结束：画面为空。走廊里的重力仪向同一方向偏了一格。'
    ];
    display();
-   button.addEventListener('click',()=>{count++;try{localStorage.setItem('ym_count',String(count))}catch(_){}display();if($('labStatus'))$('labStatus').textContent='观测完成 · 未发现羊母';if($('labMessage'))$('labMessage').textContent='检测结果：未检出羊母';if($('labResult'))$('labResult').textContent='第 '+count+' 次观测 · '+remarks[(count-1)%remarks.length]+(count===7?' 第七次观测附页已解封。':'');});
+   button.addEventListener('click',()=>{
+     count++;
+     try{localStorage.setItem('ym_count',String(count))}catch(_){}
+     display();
+     if($('labStatus'))$('labStatus').textContent='观测完成 · 未发现羊母';
+     if($('labMessage'))$('labMessage').textContent='检测结果：未检出羊母';
+     let remark=remarks[(count-1)%remarks.length];
+     if(count===7) remark+=' 第七次观测附页已解封。';
+     if(count%anomalyInterval===0 && typeof anomaly?.showModal==='function'){
+       anomaly.showModal();
+       remark='异常帧已截获，仪器仍报告未检出实体。';
+     }
+     if($('labResult'))$('labResult').textContent=`第 ${count} 次观测 · ${remark}`;
+   });
  }
  const buttons=[...document.querySelectorAll('[data-filter]')];
  const items=[...document.querySelectorAll('.video-item[data-type]')];
