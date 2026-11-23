@@ -3,12 +3,12 @@
  'use strict';
  const $=id=>document.getElementById(id);
  const entries=[
- ['羊母（YM）','羊曦的母亲，死于第一次羊父羊母大战。','index.html#intro'],
- ['起源传说','羊母之死、家属签收与羊母空间计划。','index.html#origin'],
+ ['羊母（YM）','太初虚无，羊曦的母亲，从未诞生。','index.html#intro'],
+ ['起源传说','太初虚无、羊父奇点、剑桥爸爸、羊水与宇宙微波背景辐射、羊父羊母大战。','index.html#origin'],
  ['基本性质','波粒二象性与绝对反观测。','index.html#abilities'],
  ['羊母空间异常档案','YM-013：后室失踪报告、模因污染与暗物质假说。','index.html#space-archive'],
  ['羊母派与羊没派','关于不存在的派系之争。','index.html#factions'],
- ['相关人物','羊曦 YX、章翰峰、羊父、章鱼哥等在卷人物。','index.html#characters'],
+ ['相关人物','羊曦 YX、章翰峰、羊父、剑桥爸爸、章鱼哥等在卷人物。','index.html#characters'],
  ['档案员的恶意批注','退稿意见、吐槽、羊曦 YX 的空箱运单、退稿意见与羊母派经费申请。','index.html#annotations'],
  ['存在性实验','今天的观测结果仍然为零。','index.html#observation'],
  ['影像档案','YM 和 YX 的五段视频档案。','影像档案.html']
@@ -35,15 +35,15 @@
     '检测完成：只有空气。羊曦，你又给空箱贴了加急。',
     'CY 的自信已抵达现场，证据仍在路上。',
     '羊母派已提交说明：不是没有，是证据暂时不方便存在。',
-    '仪器正常。羊曦，请别再拍打仪器。你母亲的死亡回执就在抽屉里。',
+    '仪器正常。羊曦，请别再拍打仪器。你母亲的出生栏一直是空的。',
     '章鱼哥的八个大脑已完成会诊：八个都没找到。',
     '田教授批注：这不是量子力学，这是你们的报告没写明白。',
-    '羊曦申请撤回羊母的死亡登记。退回原因：家属栏是他本人签的。',
+    '羊曦申请重抄太初残卷最后一页。退回原因：他把原件上的空白填了。',
     '羊母派的嘴还在运行，证据服务器仍然离线。',
     '观测结束：画面为空。走廊里的重力仪向同一方向偏了一格。'
    ];
    display();
-   button.addEventListener('click',()=>{count++;try{localStorage.setItem('ym_count',String(count))}catch(_){}display();if($('labStatus'))$('labStatus').textContent='观测完成 · 未发现羊母';if($('labMessage'))$('labMessage').textContent='检测结果：羊母不存在';if($('labResult'))$('labResult').textContent='第 '+count+' 次观测 · '+remarks[(count-1)%remarks.length]+(count===7?' 第七次观测附页已解封。':'');});
+   button.addEventListener('click',()=>{count++;try{localStorage.setItem('ym_count',String(count))}catch(_){}display();if($('labStatus'))$('labStatus').textContent='观测完成 · 未发现羊母';if($('labMessage'))$('labMessage').textContent='检测结果：未检出羊母';if($('labResult'))$('labResult').textContent='第 '+count+' 次观测 · '+remarks[(count-1)%remarks.length]+(count===7?' 第七次观测附页已解封。':'');});
  }
  const buttons=[...document.querySelectorAll('[data-filter]')];
  const items=[...document.querySelectorAll('.video-item[data-type]')];
