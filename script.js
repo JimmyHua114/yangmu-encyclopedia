@@ -21,12 +21,35 @@
  const layer=$('searchLayer');
  if(layer && $('openSearch')){
    const input=$('siteSearch'),results=$('searchResults');
-   const render=()=>{const q=input.value.trim().toLowerCase();results.replaceChildren();const found=entries.filter(e=>(e[0]+e[1]).toLowerCase().includes(q));if(!q||!found.length){const p=document.createElement('p');p.textContent=q?'没有匹配的词条，羊母仍未找到。':'输入关键词，搜索羊母宇宙。';results.append(p);return;}for(const e of found){const a=document.createElement('a');a.href=e[2];a.className='search-hit';const strong=document.createElement('strong');strong.textContent=e[0];const span=document.createElement('span');span.textContent=e[1];a.append(strong,span);results.append(a);}};
+   const render=()=>{
+     const q=input.value.trim().toLowerCase();
+     results.replaceChildren();
+     const found=entries.filter(entry=>(entry[0]+entry[1]).toLowerCase().includes(q));
+     if(q==='03:00:08') found.push(['CAM-03 · 校时复核','值班室导出索引中有两条同一时间的记录。','#camera-time-check']);
+     if(!q||!found.length){
+       const p=document.createElement('p');
+       p.textContent=q?'没有匹配的词条，羊母仍未找到。':'输入关键词，搜索羊母宇宙。';
+       results.append(p);
+       return;
+     }
+     for(const [title,description,link] of found){
+       const a=document.createElement('a');
+       a.href=link;
+       a.className='search-hit';
+       const strong=document.createElement('strong');
+       strong.textContent=title;
+       const span=document.createElement('span');
+       span.textContent=description;
+       a.append(strong,span);
+       results.append(a);
+     }
+   };
    const open=()=>{layer.hidden=false;input.value='';render();input.focus();};
    const close=()=>{layer.hidden=true;};
    $('openSearch').addEventListener('click',open);
    $('closeSearch')?.addEventListener('click',close);
    input.addEventListener('input',render);
+   results.addEventListener('click',event=>{if(event.target.closest('a[href]'))close();});
    layer.addEventListener('click',e=>{if(e.target===layer)close()});
    document.addEventListener('keydown',e=>{if(e.key==='Escape')close();if(e.key==='/'&&layer.hidden&&!/INPUT|TEXTAREA/.test(document.activeElement?.tagName||'')){e.preventDefault();open();}});
  }

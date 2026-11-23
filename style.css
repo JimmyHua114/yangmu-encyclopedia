@@ -230,3 +230,11 @@
 .school-sources li:target { background: #eaf1eb; }
 .archivist-heading { margin-top: 26px; }
 .archivist-notes { border-top: 1px solid var(--border); border-radius: 8px; }
+
+.catalog-number { text-decoration: underline dotted; text-underline-offset: .16em; }
+.archive-appendix:not(:target) { display: none; }
+.archive-appendix { border-top: 1px solid currentColor; margin-top: 12px; padding-top: 10px; }
+.archive-appendix p, .space-archive .archive-appendix p { margin: 5px 0 0; }
+.source-appendix { margin-top: 4px; }
+.source-appendix summary { width: fit-content; color: var(--green); cursor: pointer; }
+.source-appendix p { margin-bottom: 4px; }
