@@ -14,7 +14,8 @@
  ['相关人物','羊曦 YX、章翰峰、羊父、剑桥爸爸、章鱼哥等在卷人物。','index.html#characters'],
  ['档案员的恶意批注','退稿意见、吐槽、羊曦 YX 的空箱运单、退稿意见与羊母派经费申请。','index.html#annotations'],
  ['存在性实验','今天的观测结果仍然为零。','index.html#observation'],
- ['影像档案','YM 和 YX 的五段视频档案。','影像档案.html']
+ ['影像档案','YM 和 YX 的原卷及五段补录影像。','影像档案.html'],
+ ['补录影像','值班室收到的五段新录像。','影像档案.html#supplemental-footage']
  ];
  const layer=$('searchLayer');
  if(layer && $('openSearch')){
