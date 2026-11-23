@@ -3,12 +3,12 @@
  'use strict';
  const $=id=>document.getElementById(id);
  const entries=[
- ['羊母（YM）','一种因其不存在而广为人知的不存在物。','index.html#intro'],
- ['起源传说','羊父羊母大战与羊母空间计划。','index.html#origin'],
+ ['羊母（YM）','羊曦的母亲，死于第一次羊父羊母大战。','index.html#intro'],
+ ['起源传说','羊母之死、家属签收与羊母空间计划。','index.html#origin'],
  ['基本性质','波粒二象性与绝对反观测。','index.html#abilities'],
  ['羊母派与羊没派','关于不存在的派系之争。','index.html#factions'],
- ['相关人物','羊曦 YX、章翰峰、羊父、章鱼哥等 ARG 角色。','index.html#characters'],
- ['档案员的恶意批注','退稿意见、吐槽、YX 空箱运输、CY 自信与羊母派经费申请。','index.html#annotations'],
+ ['相关人物','羊曦 YX、章翰峰、羊父、章鱼哥等在卷人物。','index.html#characters'],
+ ['档案员的恶意批注','退稿意见、吐槽、羊曦 YX 的空箱运单、退稿意见与羊母派经费申请。','index.html#annotations'],
  ['存在性实验','今天的观测结果仍然为零。','index.html#observation'],
  ['影像档案','YM 和 YX 的五段视频档案。','影像档案.html']
  ];
@@ -31,13 +31,13 @@
    const display=()=>{if($('observeCount'))$('observeCount').textContent=String(count);if($('withdrawnNote'))$('withdrawnNote').hidden=count<7};
    const remarks=[
     '无信号。羊母的排场到了，本人依然没到。',
-    '检测完成：空气一份。建议 YX 下次别给空箱子贴加急。',
+    '检测完成：只有空气。羊曦，你又给空箱贴了加急。',
     'CY 的自信已抵达现场，证据仍在路上。',
     '羊母派已提交说明：不是没有，是证据暂时不方便存在。',
-    '仪器正常。请勿通过拍打设备，要求现实配合剧情。',
+    '仪器正常。羊曦，请别再拍打仪器。你母亲的死亡回执就在抽屉里。',
     '章鱼哥的八个大脑已完成会诊：八个都没找到。',
     '田教授批注：这不是量子力学，这是你们的报告没写明白。',
-    'YX 申请把失败记录改成“高维成功”。申请已被驳回。',
+    '羊曦申请撤回羊母的死亡登记。退回原因：家属栏是他本人签的。',
     '羊母派的嘴还在运行，证据服务器仍然离线。',
     '新发现：羊母的存在感，主要由宣传部门提供。'
    ];
