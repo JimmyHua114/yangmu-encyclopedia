@@ -222,3 +222,11 @@
 @media (max-width: 440px) {
   .paper-copy dl div { grid-template-columns: minmax(0, 1fr); }
 }
+
+.annotation > .school-record { padding-top: 12px; }
+.annotation > .school-record p + p { margin-top: 10px; }
+.school-sources h3 { margin: 0; }
+.school-sources ol { margin: 6px 0 0; padding-inline-start: 1.5em; }
+.school-sources li:target { background: #eaf1eb; }
+.archivist-heading { margin-top: 26px; }
+.archivist-notes { border-top: 1px solid var(--border); border-radius: 8px; }
