@@ -6,6 +6,7 @@
  ['羊母（YM）','羊曦的母亲，死于第一次羊父羊母大战。','index.html#intro'],
  ['起源传说','羊母之死、家属签收与羊母空间计划。','index.html#origin'],
  ['基本性质','波粒二象性与绝对反观测。','index.html#abilities'],
+ ['羊母空间异常档案','YM-013：后室失踪报告、模因污染与暗物质假说。','index.html#space-archive'],
  ['羊母派与羊没派','关于不存在的派系之争。','index.html#factions'],
  ['相关人物','羊曦 YX、章翰峰、羊父、章鱼哥等在卷人物。','index.html#characters'],
  ['档案员的恶意批注','退稿意见、吐槽、羊曦 YX 的空箱运单、退稿意见与羊母派经费申请。','index.html#annotations'],
@@ -39,7 +40,7 @@
     '田教授批注：这不是量子力学，这是你们的报告没写明白。',
     '羊曦申请撤回羊母的死亡登记。退回原因：家属栏是他本人签的。',
     '羊母派的嘴还在运行，证据服务器仍然离线。',
-    '新发现：羊母的存在感，主要由宣传部门提供。'
+    '观测结束：画面为空。走廊里的重力仪向同一方向偏了一格。'
    ];
    display();
    button.addEventListener('click',()=>{count++;try{localStorage.setItem('ym_count',String(count))}catch(_){}display();if($('labStatus'))$('labStatus').textContent='观测完成 · 未发现羊母';if($('labMessage'))$('labMessage').textContent='检测结果：羊母不存在';if($('labResult'))$('labResult').textContent='第 '+count+' 次观测 · '+remarks[(count-1)%remarks.length]+(count===7?' 第七次观测附页已解封。':'');});

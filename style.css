@@ -17,3 +17,72 @@
 .gallery-main{padding-bottom:75px}.gallery-hero{max-width:790px}.gallery-hero h1{margin:10px 0}.gallery-hero>p{color:#677c6b;font-size:16px}.gallery-counters{display:flex;gap:40px;margin-top:22px}.gallery-counters span{display:flex;align-items:baseline;gap:8px;font-size:12px;color:#819789}.gallery-counters b{font-size:27px;color:var(--green)}.gallery-control{display:flex;align-items:center;justify-content:space-between;gap:15px;border-block:1px solid var(--border);padding:17px 0;margin:27px 0}.filter-tabs{display:flex;gap:10px;flex-wrap:wrap}.filter-tabs button{border:1px solid var(--border);border-radius:5px;background:#fff;padding:7px 13px;font-size:12px;color:#708674}.filter-tabs button.selected{color:white;border-color:var(--green);background:var(--green)}.gallery-caption{font-size:12px;color:#8c9c8f}.video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:21px;align-items:start}.video-wrapper{background:#12231a;display:flex;justify-content:center;align-items:center}.video-wrapper.wide{aspect-ratio:16/9}.video-wrapper.tall{height:380px}.video-wrapper video{width:100%;height:100%;object-fit:contain}.video-copy{padding:18px 19px}.video-copy h2{font-size:17px;margin:5px 0}.video-copy p{font-size:12px;color:#829687;margin:0}.gallery-bottom{margin-top:34px}.gallery-bottom b{color:var(--green)}.gallery-bottom p{font-size:12px;color:#7f9484;margin:6px 0}.legacy-redirect{margin:20vh auto;text-align:center;max-width:540px;padding:30px}
 @media(max-width:1140px){.page-layout{grid-template-columns:130px minmax(0,1fr) 205px;gap:23px}.nav{gap:17px}}@media(max-width:940px){.shell{width:calc(100% - 42px)}.page-layout{grid-template-columns:125px minmax(0,1fr)}.right-rail{display:none}.nav{gap:13px}.nav a{font-size:12px}.search-trigger span,.search-trigger kbd{display:none}}
 @media(max-width:650px){.shell{width:calc(100% - 34px)}.header-inner{min-height:59px;flex-wrap:wrap;gap:5px;padding:7px 0}.brand-mark{width:31px;height:31px;font-size:18px}.brand-name{font-size:14px}.brand-name small{font-size:8px}.nav{order:4;width:100%;display:flex;justify-content:space-between;gap:5px;margin:4px 0 -8px}.nav a{font-size:11px;padding:8px 0}.search-trigger,.header-back{margin-left:auto}.breadcrumb{font-size:10px;padding:22px 0 25px}.page-layout{display:block}.side-index{display:none}.main-title{font-size:41px}.deck{font-size:15px}.article-meta{font-size:10px}.absence-visual{height:210px}.lead-figure{margin-bottom:35px}.content-section{margin-bottom:40px}.section-heading h2{font-size:23px}.facts{grid-template-columns:repeat(2,1fr)}.facts>div:nth-child(3){border-left:0;border-top:1px solid var(--border)}.facts>div:nth-child(4){border-top:1px solid var(--border)}.factions{grid-template-columns:1fr}.faction p{min-height:0}.lab-value{font-size:66px}.featured-caption{flex-direction:column;align-items:flex-start}.footer-inner{flex-wrap:wrap;gap:16px;padding:25px 0}.footer-links{width:100%}.gallery-counters{gap:13px;justify-content:space-between}.gallery-counters span{flex-direction:column;gap:1px}.gallery-counters b{font-size:23px}.gallery-control{align-items:flex-start;flex-direction:column}.video-grid{grid-template-columns:1fr}.video-wrapper.tall{height:380px}.filter-tabs button{padding:6px 10px;font-size:11px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.absence-visual:after{animation:none}}
+
+.space-archive {
+  background: #20251f;
+  border: 1px solid #414941;
+  border-radius: 8px;
+  color: #eef1e8;
+  padding: 0 20px;
+}
+
+.space-archive p {
+  color: #d7ded1;
+  font-size: 15px;
+  margin: 0 0 14px;
+}
+
+.space-archive .space-archive-id {
+  color: #bfccaf;
+  font: 13px/1.6 var(--sans);
+  letter-spacing: .08em;
+  margin: 0;
+  padding: 15px 0;
+}
+
+.space-archive details {
+  border-top: 1px solid #505950;
+}
+
+.space-archive summary {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 650;
+  padding: 14px 0;
+}
+
+.space-archive summary::marker {
+  color: #c5d1a9;
+}
+
+.voice-transcript {
+  background: #151914;
+  border: 1px solid #505950;
+  border-radius: 5px;
+  margin: 0 0 14px;
+  padding: 6px 12px;
+}
+
+.voice-transcript > div {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 16px;
+  padding: 6px 0;
+}
+
+.voice-transcript dt {
+  color: #bfccaf;
+  font-size: 14px;
+}
+
+.voice-transcript dd {
+  margin: 0;
+}
+
+.voice-gap {
+  border-bottom: 1px dashed #aebba6;
+  display: inline-block;
+  margin: 0 .25em;
+  width: 3.75em;
+}
