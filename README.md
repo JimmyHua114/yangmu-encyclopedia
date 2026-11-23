@@ -4,32 +4,19 @@
 
 ## 目前状态
 
-网页正文、样式、交互和 GitHub Pages 工作流已上传。
-五段 MP4 视频和五张视频封面暂未上传；这些资源在本地完整版部署包的 `media/` 和 `assets/posters/` 目录中。
+静态网页、交互、五段视频与五张封面已齐全。四段较大的 MP4 使用 `media/chunks/` 分片，由前端脚本自动重组播放；另一段直接读取 MP4。
+
+2026-11-23 更新：加入六份档案员批注、章翰峰附注、十条轮换实验反馈，以及累计七次观测后解封的 ARG 附页。三张用户提供的角色形象对应羊母、羊曦、章翰峰，保存在 `assets/characters/`，原图保持不变。
 
 ## 站点发布
 
-进入仓库 **Settings → Pages → Build and deployment**，将 **Source** 选为 **GitHub Actions**。
-然后在 **Actions → Publish YM Encyclopedia** 页面运行或重新运行发布工作流。
+GitHub Pages 工作流 `.github/workflows/pages.yml` 在 `main` 更新后自动部署。公开入口：
 
-配置完成后，公开站点地址应为：
+https://jimmyhua114.github.io/yangmu-encyclopedia/
 
-https://JimmyHua114.github.io/yangmu-encyclopedia/
+Cloudflare Pages 的预定项目名称为 `ymnb`（若占用则尝试 `yxnb`），目前仍需完成账号授权与项目创建；未创建的域名不代表已经上线。
 
-这只是预计地址；是否上线需以 GitHub Pages 部署成功为准。
-
-## 视频文件上传
-
-从本地“羊母百科_GitHubPages部署包.zip”中解压，然后将以下文件上传到对应路径：
-
-- `media/YM视频.mp4`
-- `media/YX视频.mp4`
-- `media/YX视频2.mp4`
-- `media/视频2026-11-19_213338_398.mp4`
-- `media/视频2026-11-19_213352_750.mp4`
-- `assets/posters/` 目录中的全部五张 JPG 封面
-
-视频及封面上传以后，网页已使用相对路径引用它们，无须修改 HTML。
+连接此仓库时使用 `main` 分支、无框架预设、构建命令 `exit 0`、输出目录 `.`。此站点不需要数据库或访客账号。
 
 ## 页面
 

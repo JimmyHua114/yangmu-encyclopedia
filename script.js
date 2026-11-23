@@ -7,7 +7,8 @@
  ['起源传说','羊父羊母大战与羊母空间计划。','index.html#origin'],
  ['基本性质','波粒二象性与绝对反观测。','index.html#abilities'],
  ['羊母派与羊没派','关于不存在的派系之争。','index.html#factions'],
- ['相关人物','YX、羊父、章鱼哥等虚构人物。','index.html#characters'],
+ ['相关人物','羊曦 YX、章翰峰、羊父、章鱼哥等 ARG 角色。','index.html#characters'],
+ ['档案员的恶意批注','退稿意见、吐槽、YX 空箱运输、CY 自信与羊母派经费申请。','index.html#annotations'],
  ['存在性实验','今天的观测结果仍然为零。','index.html#observation'],
  ['影像档案','YM 和 YX 的五段视频档案。','影像档案.html']
  ];
@@ -26,10 +27,22 @@
  const button=$('observeButton');
  if(button){
    let count=0;
-   try{count=Number(localStorage.getItem('ym_count')||0)}catch(_){}
-   const display=()=>{if($('observeCount'))$('observeCount').textContent=String(count)};
+   try{const saved=Number(localStorage.getItem('ym_count')||0);if(Number.isSafeInteger(saved)&&saved>=0)count=saved}catch(_){}
+   const display=()=>{if($('observeCount'))$('observeCount').textContent=String(count);if($('withdrawnNote'))$('withdrawnNote').hidden=count<7};
+   const remarks=[
+    '无信号。羊母的排场到了，本人依然没到。',
+    '检测完成：空气一份。建议 YX 下次别给空箱子贴加急。',
+    'CY 的自信已抵达现场，证据仍在路上。',
+    '羊母派已提交说明：不是没有，是证据暂时不方便存在。',
+    '仪器正常。请勿通过拍打设备，要求现实配合剧情。',
+    '章鱼哥的八个大脑已完成会诊：八个都没找到。',
+    '田教授批注：这不是量子力学，这是你们的报告没写明白。',
+    'YX 申请把失败记录改成“高维成功”。申请已被驳回。',
+    '羊母派的嘴还在运行，证据服务器仍然离线。',
+    '新发现：羊母的存在感，主要由宣传部门提供。'
+   ];
    display();
-   button.addEventListener('click',()=>{count++;try{localStorage.setItem('ym_count',String(count))}catch(_){}display();if($('labStatus'))$('labStatus').textContent='观测完成 · 未发现羊母';if($('labMessage'))$('labMessage').textContent='检测结果：羊母不存在';if($('labResult'))$('labResult').textContent=['无信号。羊母不存在。','第 '+count+' 次实验成功证明：仍然没有羊母。','空白非常稳定，羊母依旧不存在。'][count%3];});
+   button.addEventListener('click',()=>{count++;try{localStorage.setItem('ym_count',String(count))}catch(_){}display();if($('labStatus'))$('labStatus').textContent='观测完成 · 未发现羊母';if($('labMessage'))$('labMessage').textContent='检测结果：羊母不存在';if($('labResult'))$('labResult').textContent='第 '+count+' 次观测 · '+remarks[(count-1)%remarks.length]+(count===7?' 第七次观测附页已解封。':'');});
  }
  const buttons=[...document.querySelectorAll('[data-filter]')];
  const items=[...document.querySelectorAll('.video-item[data-type]')];
