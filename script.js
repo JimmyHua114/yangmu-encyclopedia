@@ -5,8 +5,8 @@
  const phaseDuration=4000;
  const phases=[
    {name:'signal',title:'YM-0▉0｜信号回流',value:'█',status:'信号回流 · 同步失败',message:'检测结果：画面来源待核',glyphs:'▒░▉�',stride:2},
-   {name:'registry',title:'名册 · 观测席还留着一位',value:'1',status:'名册更新 · 新增一条应答',message:'新增记录：当前观测席',glyphs:'□░▌',stride:3},
-   {name:'recovery',title:'复位完成｜尚有一条记录未撤回',value:'0',status:'终端已复位 · 等待档案回执',message:'未撤回记录：1 条',glyphs:'_□·',stride:5}
+   {name:'registry',title:'YM-000｜观测席登记异常',value:'1',status:'名册更新 · 新增一条应答',message:'新增记录：当前观测席',glyphs:'□░▌',stride:3},
+   {name:'recovery',title:'YM-000｜终端恢复',value:'0',status:'终端已复位 · 等待档案回执',message:'未撤回记录：1 条',glyphs:'_□·',stride:5}
  ];
  const normalTitle=document.title;
  const storageKey='ym_interference_start';
@@ -88,25 +88,25 @@
  }
 
  const entries=[
- ['羊母（YM）','太初虚无，羊曦的母亲，从未诞生。','index.html#intro'],
- ['起源传说','《零时之前》据说由剑桥爸爸亲笔撰写，记载太初虚无、羊父奇点与羊父羊母大战。','index.html#origin'],
- ['基本性质','波粒二象性与绝对反观测。','index.html#abilities'],
- ['羊母空间异常档案','YM-013：后室失踪报告、模因污染与暗物质假说。','index.html#space-archive'],
- ['零号元素 Ym','Hydrogen 前的一格，四个零。羊母的残骸、虚无与宇宙膨胀。','index.html#element-ym'],
- ['夜间校务记录','羊曦、学校、失踪名册与复活计划。','index.html#academy-record'],
- ['值班室副本','白天公示、夜间底稿、失物招领与监控抄录。','index.html#evidence-room'],
- ['羊母派与羊没派','羊曦的追随者与追查失踪者的羊没派。','index.html#factions'],
- ['相关人物','羊曦 YX、章翰峰、羊父、剑桥爸爸等在卷人物。','index.html#characters'],
- ['章翰峰（章鱼哥 / 克苏鲁之王）','大战后 ___ 年诞生。拉莱耶、梦境、羊母残余与西楼梯零层。','index.html#cthulhu-archive'],
- ['学校管理记录','羊曦与章翰峰共同经营学校，校务会记录与零层钥匙。','index.html#school-management'],
- ['剑桥爸爸残片档案','大战后魂魄碎裂，愤怒和镜子分别聚合。','index.html#cambridge-fragments'],
- ['剑桥爸爸的愤怒','由大部分魂魄碎片重聚，保留记忆并继续签发密令。','index.html#cambridge-anger'],
- ['剑桥爸爸的镜子','由受羊母污染的碎片聚合，独立行动并反对剑桥爸爸。','index.html#cambridge-mirror'],
- ['学生意见与校务记录','学生手记、羊曦、校规、食堂 35 元、旧喷泉广场篮球场与前任校长的意见簿。','index.html#student-notes'],
- ['档案批注','羊母、羊母派经费申请与退稿意见。','index.html#archive-notes'],
- ['存在性实验','今天的观测结果仍然为零。','index.html#observation'],
- ['影像档案','YM 和 YX 的原卷及五段补录影像。','影像档案.html'],
- ['补录影像','值班室收到的五段新录像。','影像档案.html#supplemental-footage']
+ ['YM-000｜羊母','管制规程与异常描述。羊曦之母，出生事件未发生。','index.html#intro'],
+ ['附录 A｜起源文献','《零时之前》与剑桥爸爸、羊父奇点、大战及太初记载。','index.html#origin'],
+ ['附录 B｜性质与实验','基本性质、波粒二象性、真空传播与绝对反观测。','index.html#abilities'],
+ ['YM-013｜羊母空间异常档案','后室、西楼梯失踪、模因污染与暗物质。','index.html#space-archive'],
+ ['零号元素 Ym','氢前第 0 栏的记录。羊母残留与宇宙膨胀假说。','index.html#element-ym'],
+ ['013-09｜离校记录核查','夜间校务、羊曦、学校、失踪名册与复活计划。','index.html#academy-record'],
+ ['值班室存根','白天公示、夜间底稿、失物招领与监控抄录。','index.html#evidence-room'],
+ ['附录 C｜相关组织','羊母派与羊没派，封条物证和名册保全密令。','index.html#factions'],
+ ['附录 D｜人员索引','相关人物及代号：羊曦 YX、章翰峰、羊父、剑桥爸爸。','index.html#characters'],
+ ['013-03｜拉莱耶文献比对','章翰峰、章鱼哥、克苏鲁之王。梦境与西楼梯零层。','index.html#cthulhu-archive'],
+ ['013-10｜校务会纪要','共同经营学校、门框保留决定与零层钥匙。','index.html#school-management'],
+ ['附录 C.1｜剑桥爸爸残片档案','两起残片聚合记录，愤怒和镜子各自发令。','index.html#cambridge-fragments'],
+ ['剑桥爸爸的愤怒','回收残片、战前记忆及门框封存令。','index.html#cambridge-anger'],
+ ['剑桥爸爸的镜子','受污染的残片、独立声明与签名比对。','index.html#cambridge-mirror'],
+ ['附录 E｜校务核查与证词','学生意见、设备收存、食堂 35 元、旧喷泉广场篮球场与前任校长。','index.html#student-notes'],
+ ['审阅意见与退件记录','档案批注、CY 笔录、羊母派申请及田教授退稿。','index.html#archive-notes'],
+ ['附录 F｜观测终端','存在性实验、采样读数与第七次观测日志。','index.html#observation'],
+ ['附录 G｜影音证物目录','影像档案，YM 原件及 YX 行为艺术送审件。','影像档案.html'],
+ ['补录影像','值班室接收的第 006 至 010 号证物。','影像档案.html#supplemental-footage']
  ];
  const layer=$('searchLayer');
  if(layer && $('openSearch')){
@@ -118,7 +118,7 @@
      if(q==='03:00:08') found.push(['CAM-03 · 校时复核','值班室导出索引中有两条同一时间的记录。','#camera-time-check']);
      if(!q||!found.length){
        const p=document.createElement('p');
-       p.textContent=q?'没有匹配的词条，羊母仍未找到。':'输入关键词，搜索羊母宇宙。';
+       p.textContent=q?'索引中无匹配记录。':'输入编号或关键词以调阅档案。';
        results.append(p);
        return;
      }
@@ -149,8 +149,8 @@
    const scream=$('observationScream');
    const anomalyInterval=13;
    const warnings={
-     [anomalyInterval-2]: {value:'_',status:'观测完成 · 读数缺失',message:'检测结果：空白',remark:'读数栏已留空，原始记录仍在写入。'},
-     [anomalyInterval-1]: {value:'▒?',status:'信号串入 · 校验失败',message:'检测结果：不可解析',remark:'无法解码末行。终端收到一帧不在本次采样中的影像。'}
+     [anomalyInterval-2]: {value:'_',status:'采样完成 · 数值字段缺失',message:'结果字段为空',remark:'写入完成。数值占位符无对应原始读数。'},
+     [anomalyInterval-1]: {value:'▒?',status:'信号混入 · 校验失败',message:'结果未通过格式校验',remark:'末行解码失败。缓存帧的时间戳早于本轮采样。'}
    };
    const value=$('labReading'),status=$('labStatus'),message=$('labMessage');
    let count=0;
@@ -158,8 +158,8 @@
    refreshReadout=()=>{
      const reading=currentPhase??warnings[count%anomalyInterval];
      if(value) value.textContent=reading?.value??'0';
-     if(status) status.textContent=reading?.status??(count?'观测完成 · 未发现羊母':'系统就绪 · 等待观测');
-     if(message) message.textContent=reading?.message??(count?'检测结果：未检出羊母':'羊母出现概率');
+     if(status) status.textContent=reading?.status??(count?'采样完成 · 无实体检出':'待机 · 等待采样');
+     if(message) message.textContent=reading?.message??(count?'结果：未检出 YM-000':'有效实体检出率');
    };
    const display=()=>{
      if($('observeCount'))$('observeCount').textContent=String(count);
@@ -176,16 +176,16 @@
      advanceInterference();
    });
    const remarks=[
-    '无信号。羊母的排场到了，本人依然没到。',
-    '检测完成：只有空气。羊曦，你又给空箱贴了加急。',
-    'CY 的自信已抵达现场，证据仍在路上。',
-    '羊母派已提交说明：不是没有，是证据暂时不方便存在。',
-    '仪器正常。羊曦，请别再拍打仪器。你母亲的出生栏一直是空的。',
-    '章鱼哥的八个大脑已完成会诊：八个都没找到。',
-    '田教授批注：这不是量子力学，这是你们的报告没写明白。',
-    '羊曦申请重抄《零时之前》最后一页。退回原因：他把原件上的空白填了。',
-    '羊母派的嘴还在运行，证据服务器仍然离线。',
-    '观测结束：画面为空。走廊里的重力仪向同一方向偏了一格。'
+    '空样已保存。记录中无可辨识目标。',
+    '空箱移交单已录入。箱内成像无可见物。',
+    'CY 目击笔录尚未核准。终端读数维持零。',
+    '第三份复核申请未附证物。已登记退回。',
+    '仪器校准通过。亲属簿出生栏未写入。',
+    'ZHF 会审结束。出席人数一，表决记录八。',
+    '对照组读数已归档。对应退件可供调阅。',
+    '《零时之前》末页补抄件退回。原缺口宽度不得修改。',
+    '备用通道离线。只读缓冲区仍收到一条应答。',
+    '画面无目标。西楼梯重力仪向登记方向偏移一格。'
    ];
    display();
    button.addEventListener('click',()=>{
@@ -193,20 +193,20 @@
      try{localStorage.setItem('ym_count',String(count))}catch(_){}
      display();
      let remark=warnings[count%anomalyInterval]?.remark??remarks[(count-1)%remarks.length];
-     if(count===7) remark+=' 第七次观测附页已解封。';
+     if(count===7) remark+=' 观测日志 F-07 已开放调阅。';
      if(count%anomalyInterval===0 && typeof anomaly?.showModal==='function'){
        anomaly.showModal();
        // Keep playback in the click handler for browsers that require a user gesture.
        scream?.play().catch(()=>{});
-       remark='异常帧已截获，仪器仍报告未检出实体。';
+       remark='异常帧及音轨已保存。实体检出数维持零。';
      }
-     if($('labResult'))$('labResult').textContent=`第 ${count} 次观测 · ${remark}`;
+     if($('labResult'))$('labResult').textContent=`采样 ${count} · ${remark}`;
    });
  }
  const buttons=[...document.querySelectorAll('[data-filter]')];
  const items=[...document.querySelectorAll('.video-item[data-type]')];
  if(buttons.length){
-  buttons.forEach(b=>b.addEventListener('click',()=>{const f=b.dataset.filter;let n=0;for(const el of items){const show=f==='all'||el.dataset.type===f;el.hidden=!show;if(show)n++;else el.querySelector('video')?.pause()}buttons.forEach(x=>{const active=x===b;x.classList.toggle('selected',active);x.setAttribute('aria-pressed',String(active))});if($('galleryCount'))$('galleryCount').textContent='共 '+n+' 条资料'}))
+  buttons.forEach(b=>b.addEventListener('click',()=>{const f=b.dataset.filter;let n=0;for(const el of items){const show=f==='all'||el.dataset.type===f;el.hidden=!show;if(show)n++;else el.querySelector('video')?.pause()}buttons.forEach(x=>{const active=x===b;x.classList.toggle('selected',active);x.setAttribute('aria-pressed',String(active))});if($('galleryCount'))$('galleryCount').textContent='列出 '+n+' 件'}))
  }
  resumeInterference();
  window.addEventListener('pageshow',event=>{if(event.persisted) resumeInterference();});

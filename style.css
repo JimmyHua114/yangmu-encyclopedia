@@ -343,3 +343,12 @@ body[data-observation-phase="recovery"]::after {
     to { transform: scale(1); }
   }
 }
+
+.archive-entry {
+  margin-top: 24px;
+}
+
+.archive-entry > h3 {
+  margin: 25px 0 10px;
+  font: 700 21px/1.4 var(--serif);
+}
