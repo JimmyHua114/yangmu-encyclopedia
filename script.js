@@ -90,15 +90,24 @@
  const entries=[
  ['YM-000｜羊母','管制规程与异常描述。羊曦之母，出生事件未发生。','index.html#intro'],
  ['附录 A｜起源文献','《零时之前》与剑桥爸爸、羊父奇点、大战及太初记载。','index.html#origin'],
+ ['附录 A.1｜历代异文','古代文献、文人笔记与留声试录，涉及失踪、语音缺口及室内尺度。','index.html#historical-records'],
+ ['古希腊｜《空室习题》','几何抄本。六肘库房实测十二条边。','index.html#history-greek'],
+ ['东晋｜《却扇斋杂记》','庾子衡清谈时坠入坐席。七日后收到回信。','index.html#history-jin'],
+ ['中唐｜《宿东偏》','卢执素的驿站来信。后室中各房灯芯长度不一。','index.html#history-tang'],
+ ['北宋｜《校书余牍》','许循对读时发现语音缺口，随后失踪。','index.html#history-song'],
+ ['晚明｜《无院图》','沈简庵所绘水榭平面与修井账。','index.html#history-ming'],
+ ['晚清｜翻译馆留声试录','译员笔录及两支蜡筒，均可对照语音缺口。','index.html#history-qing'],
  ['附录 B｜性质与实验','基本性质、波粒二象性、真空传播与绝对反观测。','index.html#abilities'],
- ['YM-013｜羊母空间异常档案','后室、西楼梯失踪、模因污染与暗物质。','index.html#space-archive'],
+ ['YM-013｜羊母空间异常档案','后室、随机穿模、回收影像、模因污染与暗物质。','index.html#space-archive'],
+ ['013-02｜三处穿模事件比对','现实切出，地点包括商场、旅馆和装卸坡道。','index.html#noclip-cases'],
  ['零号元素 Ym','氢前第 0 栏的记录。羊母残留与宇宙膨胀假说。','index.html#element-ym'],
  ['013-09｜离校记录核查','夜间校务、羊曦、学校、失踪名册与复活计划。','index.html#academy-record'],
  ['值班室存根','白天公示、夜间底稿、失物招领与监控抄录。','index.html#evidence-room'],
  ['附录 C｜相关组织','羊母派与羊没派，封条物证和名册保全密令。','index.html#factions'],
  ['附录 D｜人员索引','相关人物及代号：羊曦 YX、章翰峰、羊父、剑桥爸爸。','index.html#characters'],
- ['013-03｜拉莱耶文献比对','章翰峰、章鱼哥、克苏鲁之王。梦境与西楼梯零层。','index.html#cthulhu-archive'],
- ['013-10｜校务会纪要','共同经营学校、门框保留决定与零层钥匙。','index.html#school-management'],
+ ['013-03｜拉莱耶文献比对','章翰峰、章鱼哥、克苏鲁之王。梦境地图及回收带中的门框。','index.html#cthulhu-archive'],
+ ['013-04｜语音缺口与模因污染','羊母名称口述、两路录音与历代同类记载。','index.html#voice-gap-record'],
+ ['013-10｜校务会纪要','共同经营学校、旧构件与零层钥匙。','index.html#school-management'],
  ['附录 C.1｜剑桥爸爸残片档案','两起残片聚合记录，愤怒和镜子各自发令。','index.html#cambridge-fragments'],
  ['剑桥爸爸的愤怒','回收残片、战前记忆及门框封存令。','index.html#cambridge-anger'],
  ['剑桥爸爸的镜子','受污染的残片、独立声明与签名比对。','index.html#cambridge-mirror'],
@@ -185,7 +194,7 @@
     '对照组读数已归档。对应退件可供调阅。',
     '《零时之前》末页补抄件退回。原缺口宽度不得修改。',
     '备用通道离线。只读缓冲区仍收到一条应答。',
-    '画面无目标。西楼梯重力仪向登记方向偏移一格。'
+    '画面无目标。仪器已完成归零，空箱方向仍有一格偏移。'
    ];
    display();
    button.addEventListener('click',()=>{
