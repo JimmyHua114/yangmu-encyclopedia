@@ -62,8 +62,11 @@
      [anomalyInterval-2]: {value:'_',status:'观测完成 · 读数缺失',message:'检测结果：空白',remark:'读数栏已留空，原始记录仍在写入。'},
      [anomalyInterval-1]: {value:'▒?',status:'信号串入 · 校验失败',message:'检测结果：不可解析',remark:'无法解码末行。终端收到一帧不在本次采样中的影像。'}
    };
-   const interference={value:'█',status:'信号回流 · 正在复位',message:'检测结果：暂缓显示'};
+   const interference={value:'█',status:'信号回流 · 正在复位',message:'检测结果：观测者已登记'};
    const value=$('labReading'),status=$('labStatus'),message=$('labMessage');
+   const affectedText=[...document.querySelectorAll('[data-interference-text]')].map(node=>({
+     node, normal:node.textContent, corrupted:node.dataset.interferenceText
+   }));
    let count=0;
    let recoveryTimer;
    try{const saved=Number(localStorage.getItem('ym_count')||0);if(Number.isSafeInteger(saved)&&saved>=0)count=saved}catch(_){}
@@ -78,15 +81,18 @@
      if($('withdrawnNote'))$('withdrawnNote').hidden=count<7;
      showReadout();
    };
+   const setInterference=active=>{
+     document.body.classList.toggle('observation-interference',active);
+     for(const {node,normal,corrupted} of affectedText) node.textContent=active?corrupted:normal;
+     showReadout();
+   };
    anomaly?.addEventListener('close',()=>{
      clearTimeout(recoveryTimer);
      recoveryTimer=setTimeout(()=>{
        recoveryTimer=undefined;
-       document.body.classList.remove('observation-interference');
-       showReadout();
+       setInterference(false);
      },recoveryDuration);
-     document.body.classList.add('observation-interference');
-     showReadout();
+     setInterference(true);
    });
    const remarks=[
     '无信号。羊母的排场到了，本人依然没到。',
