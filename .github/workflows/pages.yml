@@ -18,6 +18,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Assemble archived MP4 files
+        run: |
+          cat media/chunks/'YM视频.mp4'.part* > 'media/ym-001.mp4'
+          cat media/chunks/'YX视频.mp4'.part* > 'media/yx-002.mp4'
+          cat media/chunks/'YX视频2.mp4'.part* > 'media/yx-003.mp4'
+          cat media/chunks/'视频2026-11-19_213352_750.mp4'.part* > 'media/yx-005.mp4'
       - uses: actions/configure-pages@v5
         with:
           enablement: true

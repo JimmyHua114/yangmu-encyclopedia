@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "include": [
+    "/media/ym-001.mp4",
+    "/media/yx-002.mp4",
+    "/media/yx-003.mp4",
+    "/media/yx-005.mp4"
+  ],
+  "exclude": []
+}
