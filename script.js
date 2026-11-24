@@ -2,6 +2,91 @@
 (() => {
  'use strict';
  const $=id=>document.getElementById(id);
+ const phaseDuration=4000;
+ const phases=[
+   {name:'signal',title:'YM-0▉0｜信号回流',value:'█',status:'信号回流 · 同步失败',message:'检测结果：画面来源待核',glyphs:'▒░▉�',stride:2},
+   {name:'registry',title:'名册 · 观测席还留着一位',value:'1',status:'名册更新 · 新增一条应答',message:'新增记录：当前观测席',glyphs:'□░▌',stride:3},
+   {name:'recovery',title:'复位完成｜尚有一条记录未撤回',value:'0',status:'终端已复位 · 等待档案回执',message:'未撤回记录：1 条',glyphs:'_□·',stride:5}
+ ];
+ const normalTitle=document.title;
+ const storageKey='ym_interference_start';
+ const originalText=new Map();
+ const searchInput=$('siteSearch');
+ const normalPlaceholder=searchInput?.getAttribute('placeholder');
+ let currentPhase;
+ let phaseStart=0;
+ let phaseTimer;
+ let refreshReadout=()=>{};
+
+ const corruptText=(text,phase)=>{
+   let offset=0;
+   const altered=text.replace(/[\p{L}\p{N}]/gu,char=>{
+     const position=offset++;
+     return position%phase.stride===0 ? phase.glyphs[(position/phase.stride)%phase.glyphs.length] : char;
+   });
+   return offset ? altered : altered.replace(/\S/u,phase.glyphs[0]);
+ };
+
+ const textFilter={acceptNode(node){
+   if(!/\S/u.test(node.data) || node.parentElement?.closest('script, style, template, noscript, textarea, [contenteditable], #labReading, #labStatus, #labMessage')){
+     return NodeFilter.FILTER_REJECT;
+   }
+   return NodeFilter.FILTER_ACCEPT;
+ }};
+
+ function applyInterferenceText(){
+   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,textFilter);
+   while(walker.nextNode()){
+     const node=walker.currentNode;
+     const previous=originalText.get(node);
+     const normal=previous?.shown===node.data ? previous.normal : node.data;
+     const {interferenceText,interferenceRegistry,interferenceRecovery}=node.parentElement.dataset;
+     const override={signal:interferenceText,registry:interferenceRegistry??interferenceText,recovery:interferenceRecovery}[currentPhase.name];
+     const shown=override ? normal.replace(/\S(?:[\s\S]*\S)?/u,()=>override) : corruptText(normal,currentPhase);
+     originalText.set(node,{normal,shown});
+     if(node.data!==shown) node.data=shown;
+   }
+ }
+
+ const watchText=()=>textObserver.observe(document.body,{subtree:true,childList:true,characterData:true});
+ const textObserver=new MutationObserver(()=>{
+   textObserver.disconnect();
+   applyInterferenceText();
+   watchText();
+ });
+
+ function advanceInterference(){
+   clearTimeout(phaseTimer);
+   textObserver.disconnect();
+   const elapsed=Date.now()-phaseStart;
+   currentPhase=phases[Math.floor(elapsed/phaseDuration)];
+   document.body.classList.toggle('observation-interference',Boolean(currentPhase));
+   document.title=currentPhase?.title??normalTitle;
+   if(searchInput && normalPlaceholder!==null){
+     searchInput.setAttribute('placeholder',currentPhase ? corruptText(normalPlaceholder,currentPhase) : normalPlaceholder);
+   }
+   if(currentPhase){
+     document.body.dataset.observationPhase=currentPhase.name;
+     refreshReadout();
+     applyInterferenceText();
+     watchText();
+     phaseTimer=setTimeout(advanceInterference,phaseDuration-elapsed%phaseDuration);
+   }else{
+     delete document.body.dataset.observationPhase;
+     for(const [node,{normal,shown}] of originalText){
+       if(node.isConnected && node.data===shown) node.data=normal;
+     }
+     originalText.clear();
+     refreshReadout();
+     try{sessionStorage.removeItem(storageKey);}catch(_){}
+   }
+ }
+
+ function resumeInterference(){
+   try{phaseStart=Number(sessionStorage.getItem(storageKey))||0;}catch(_){}
+   if(phaseStart || currentPhase) advanceInterference();
+ }
+
  const entries=[
  ['羊母（YM）','太初虚无，羊曦的母亲，从未诞生。','index.html#intro'],
  ['起源传说','《零时之前》据说由剑桥爸爸亲笔撰写，记载太初虚无、羊父奇点与羊父羊母大战。','index.html#origin'],
@@ -57,26 +142,14 @@
  if(button){
    const anomaly=$('observationAnomaly');
    const anomalyInterval=13;
-   const phaseDuration=4000;
    const warnings={
      [anomalyInterval-2]: {value:'_',status:'观测完成 · 读数缺失',message:'检测结果：空白',remark:'读数栏已留空，原始记录仍在写入。'},
      [anomalyInterval-1]: {value:'▒?',status:'信号串入 · 校验失败',message:'检测结果：不可解析',remark:'无法解码末行。终端收到一帧不在本次采样中的影像。'}
    };
-   const interference=[
-     {phase:'signal',title:'YM-0▉0｜信号回流',value:'█',status:'信号回流 · 同步失败',message:'检测结果：画面来源待核'},
-     {phase:'registry',title:'名册 · 观测席还留着一位',value:'1',status:'名册更新 · 新增一条应答',message:'新增记录：当前观测席'},
-     {phase:'recovery',title:'复位完成｜尚有一条记录未撤回',value:'0',status:'终端已复位 · 等待档案回执',message:'未撤回记录：1 条'}
-   ];
    const value=$('labReading'),status=$('labStatus'),message=$('labMessage');
-   const normalTitle=document.title;
-   const affectedText=[...document.querySelectorAll('[data-interference-text], [data-interference-registry], [data-interference-recovery]')].map(node=>({
-     node, normal:node.textContent
-   }));
    let count=0;
-   let currentPhase;
-   let phaseTimer;
    try{const saved=Number(localStorage.getItem('ym_count')||0);if(Number.isSafeInteger(saved)&&saved>=0)count=saved}catch(_){}
-   const showReadout=()=>{
+   refreshReadout=()=>{
      const reading=currentPhase??warnings[count%anomalyInterval];
      if(value) value.textContent=reading?.value??'0';
      if(status) status.textContent=reading?.status??(count?'观测完成 · 未发现羊母':'系统就绪 · 等待观测');
@@ -85,24 +158,12 @@
    const display=()=>{
      if($('observeCount'))$('observeCount').textContent=String(count);
      if($('withdrawnNote'))$('withdrawnNote').hidden=count<7;
-     showReadout();
-   };
-   const showInterferencePhase=index=>{
-     currentPhase=interference[index];
-     document.body.classList.toggle('observation-interference',Boolean(currentPhase));
-     if(currentPhase) document.body.dataset.observationPhase=currentPhase.phase;
-     else delete document.body.dataset.observationPhase;
-     document.title=currentPhase?.title??normalTitle;
-     for(const {node,normal} of affectedText){
-       const {interferenceText,interferenceRegistry,interferenceRecovery}=node.dataset;
-       node.textContent=[interferenceText,interferenceRegistry??interferenceText,interferenceRecovery][index]??normal;
-     }
-     showReadout();
-     if(currentPhase) phaseTimer=setTimeout(()=>showInterferencePhase(index+1),phaseDuration);
+     refreshReadout();
    };
    anomaly?.addEventListener('close',()=>{
-     clearTimeout(phaseTimer);
-     showInterferencePhase(0);
+     phaseStart=Date.now();
+     try{sessionStorage.setItem(storageKey,String(phaseStart));}catch(_){}
+     advanceInterference();
    });
    const remarks=[
     '无信号。羊母的排场到了，本人依然没到。',
@@ -135,6 +196,8 @@
  if(buttons.length){
   buttons.forEach(b=>b.addEventListener('click',()=>{const f=b.dataset.filter;let n=0;for(const el of items){const show=f==='all'||el.dataset.type===f;el.hidden=!show;if(show)n++;else el.querySelector('video')?.pause()}buttons.forEach(x=>{const active=x===b;x.classList.toggle('selected',active);x.setAttribute('aria-pressed',String(active))});if($('galleryCount'))$('galleryCount').textContent='共 '+n+' 条资料'}))
  }
+ resumeInterference();
+ window.addEventListener('pageshow',event=>{if(event.persisted) resumeInterference();});
 })();
 
 (() => {
