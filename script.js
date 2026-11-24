@@ -57,21 +57,27 @@
  if(button){
    const anomaly=$('observationAnomaly');
    const anomalyInterval=13;
-   const recoveryDuration=8000;
+   const phaseDuration=4000;
    const warnings={
      [anomalyInterval-2]: {value:'_',status:'观测完成 · 读数缺失',message:'检测结果：空白',remark:'读数栏已留空，原始记录仍在写入。'},
      [anomalyInterval-1]: {value:'▒?',status:'信号串入 · 校验失败',message:'检测结果：不可解析',remark:'无法解码末行。终端收到一帧不在本次采样中的影像。'}
    };
-   const interference={value:'█',status:'信号回流 · 正在复位',message:'检测结果：观测者已登记'};
+   const interference=[
+     {phase:'signal',title:'YM-0▉0｜信号回流',value:'█',status:'信号回流 · 同步失败',message:'检测结果：画面来源待核'},
+     {phase:'registry',title:'名册 · 观测席还留着一位',value:'1',status:'名册更新 · 新增一条应答',message:'新增记录：当前观测席'},
+     {phase:'recovery',title:'复位完成｜尚有一条记录未撤回',value:'0',status:'终端已复位 · 等待档案回执',message:'未撤回记录：1 条'}
+   ];
    const value=$('labReading'),status=$('labStatus'),message=$('labMessage');
-   const affectedText=[...document.querySelectorAll('[data-interference-text]')].map(node=>({
-     node, normal:node.textContent, corrupted:node.dataset.interferenceText
+   const normalTitle=document.title;
+   const affectedText=[...document.querySelectorAll('[data-interference-text], [data-interference-registry], [data-interference-recovery]')].map(node=>({
+     node, normal:node.textContent
    }));
    let count=0;
-   let recoveryTimer;
+   let currentPhase;
+   let phaseTimer;
    try{const saved=Number(localStorage.getItem('ym_count')||0);if(Number.isSafeInteger(saved)&&saved>=0)count=saved}catch(_){}
    const showReadout=()=>{
-     const reading=recoveryTimer===undefined ? warnings[count%anomalyInterval] : interference;
+     const reading=currentPhase??warnings[count%anomalyInterval];
      if(value) value.textContent=reading?.value??'0';
      if(status) status.textContent=reading?.status??(count?'观测完成 · 未发现羊母':'系统就绪 · 等待观测');
      if(message) message.textContent=reading?.message??(count?'检测结果：未检出羊母':'羊母出现概率');
@@ -81,18 +87,22 @@
      if($('withdrawnNote'))$('withdrawnNote').hidden=count<7;
      showReadout();
    };
-   const setInterference=active=>{
-     document.body.classList.toggle('observation-interference',active);
-     for(const {node,normal,corrupted} of affectedText) node.textContent=active?corrupted:normal;
+   const showInterferencePhase=index=>{
+     currentPhase=interference[index];
+     document.body.classList.toggle('observation-interference',Boolean(currentPhase));
+     if(currentPhase) document.body.dataset.observationPhase=currentPhase.phase;
+     else delete document.body.dataset.observationPhase;
+     document.title=currentPhase?.title??normalTitle;
+     for(const {node,normal} of affectedText){
+       const {interferenceText,interferenceRegistry,interferenceRecovery}=node.dataset;
+       node.textContent=[interferenceText,interferenceRegistry??interferenceText,interferenceRecovery][index]??normal;
+     }
      showReadout();
+     if(currentPhase) phaseTimer=setTimeout(()=>showInterferencePhase(index+1),phaseDuration);
    };
    anomaly?.addEventListener('close',()=>{
-     clearTimeout(recoveryTimer);
-     recoveryTimer=setTimeout(()=>{
-       recoveryTimer=undefined;
-       setInterference(false);
-     },recoveryDuration);
-     setInterference(true);
+     clearTimeout(phaseTimer);
+     showInterferencePhase(0);
    });
    const remarks=[
     '无信号。羊母的排场到了，本人依然没到。',
