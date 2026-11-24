@@ -146,6 +146,7 @@
  const button=$('observeButton');
  if(button){
    const anomaly=$('observationAnomaly');
+   const scream=$('observationScream');
    const anomalyInterval=13;
    const warnings={
      [anomalyInterval-2]: {value:'_',status:'观测完成 · 读数缺失',message:'检测结果：空白',remark:'读数栏已留空，原始记录仍在写入。'},
@@ -166,6 +167,10 @@
      refreshReadout();
    };
    anomaly?.addEventListener('close',()=>{
+     if(scream){
+       scream.pause();
+       scream.currentTime=0;
+     }
      phaseStart=Date.now();
      try{sessionStorage.setItem(storageKey,String(phaseStart));}catch(_){}
      advanceInterference();
@@ -191,6 +196,8 @@
      if(count===7) remark+=' 第七次观测附页已解封。';
      if(count%anomalyInterval===0 && typeof anomaly?.showModal==='function'){
        anomaly.showModal();
+       // Keep playback in the click handler for browsers that require a user gesture.
+       scream?.play().catch(()=>{});
        remark='异常帧已截获，仪器仍报告未检出实体。';
      }
      if($('labResult'))$('labResult').textContent=`第 ${count} 次观测 · ${remark}`;
