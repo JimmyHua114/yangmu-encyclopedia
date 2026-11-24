@@ -57,9 +57,37 @@
  if(button){
    const anomaly=$('observationAnomaly');
    const anomalyInterval=13;
+   const recoveryDuration=8000;
+   const warnings={
+     [anomalyInterval-2]: {value:'_',status:'观测完成 · 读数缺失',message:'检测结果：空白',remark:'读数栏已留空，原始记录仍在写入。'},
+     [anomalyInterval-1]: {value:'▒?',status:'信号串入 · 校验失败',message:'检测结果：不可解析',remark:'无法解码末行。终端收到一帧不在本次采样中的影像。'}
+   };
+   const interference={value:'█',status:'信号回流 · 正在复位',message:'检测结果：暂缓显示'};
+   const value=$('labReading'),status=$('labStatus'),message=$('labMessage');
    let count=0;
+   let recoveryTimer;
    try{const saved=Number(localStorage.getItem('ym_count')||0);if(Number.isSafeInteger(saved)&&saved>=0)count=saved}catch(_){}
-   const display=()=>{if($('observeCount'))$('observeCount').textContent=String(count);if($('withdrawnNote'))$('withdrawnNote').hidden=count<7};
+   const showReadout=()=>{
+     const reading=recoveryTimer===undefined ? warnings[count%anomalyInterval] : interference;
+     if(value) value.textContent=reading?.value??'0';
+     if(status) status.textContent=reading?.status??(count?'观测完成 · 未发现羊母':'系统就绪 · 等待观测');
+     if(message) message.textContent=reading?.message??(count?'检测结果：未检出羊母':'羊母出现概率');
+   };
+   const display=()=>{
+     if($('observeCount'))$('observeCount').textContent=String(count);
+     if($('withdrawnNote'))$('withdrawnNote').hidden=count<7;
+     showReadout();
+   };
+   anomaly?.addEventListener('close',()=>{
+     clearTimeout(recoveryTimer);
+     recoveryTimer=setTimeout(()=>{
+       recoveryTimer=undefined;
+       document.body.classList.remove('observation-interference');
+       showReadout();
+     },recoveryDuration);
+     document.body.classList.add('observation-interference');
+     showReadout();
+   });
    const remarks=[
     '无信号。羊母的排场到了，本人依然没到。',
     '检测完成：只有空气。羊曦，你又给空箱贴了加急。',
@@ -77,9 +105,7 @@
      count++;
      try{localStorage.setItem('ym_count',String(count))}catch(_){}
      display();
-     if($('labStatus'))$('labStatus').textContent='观测完成 · 未发现羊母';
-     if($('labMessage'))$('labMessage').textContent='检测结果：未检出羊母';
-     let remark=remarks[(count-1)%remarks.length];
+     let remark=warnings[count%anomalyInterval]?.remark??remarks[(count-1)%remarks.length];
      if(count===7) remark+=' 第七次观测附页已解封。';
      if(count%anomalyInterval===0 && typeof anomaly?.showModal==='function'){
        anomaly.showModal();

@@ -6,8 +6,8 @@
   <meta name="theme-color" content="#f8f9f7">
   <meta name="description" content="羊母观测档案馆：旧卷《零时之前》、零号元素 Ym、羊没派密档与历次观测。">
   <title>羊母（YM）｜羊母百科</title>
-  <link rel="stylesheet" href="style.css?v=ym000-r12">
-  <script src="script.js?v=ym000-r12" defer></script>
+  <link rel="stylesheet" href="style.css?v=ym000-r13">
+  <script src="script.js?v=ym000-r13" defer></script>
 </head>
 <body data-page="home">
   <a class="skip" href="#main">跳至正文</a>
@@ -296,7 +296,17 @@
         <section id="observation" class="content-section">
           <div class="section-heading"><span class="section-number">07</span><h2>羊母存在性实验</h2></div>
           <p>本站开放最先进的羊母观测装置。点击开始，验证羊母今天是否存在。连续观测时，终端可能突然显示异常影像。</p>
-          <div class="lab" aria-label="羊母存在性检测器"><div class="lab-top"><span><i class="status-light"></i> YM 存在性检测终端</span><span>DEVICE: YM-000</span></div><div class="lab-screen"><div class="lab-status" id="labStatus">系统就绪 · 等待观测</div><div class="lab-value">0<span>%</span></div><div class="lab-description" id="labMessage">羊母出现概率</div><div class="lab-meter"><span></span></div></div><div class="lab-footer"><button type="button" id="observeButton" class="primary-button">开始观测</button><span>累计观测 <strong id="observeCount">0</strong> 次</span></div><div class="lab-result" id="labResult" aria-live="polite">提示：请勿尝试用“什么都没有”作为羊母存在的证明。</div></div>
+          <div class="lab" aria-label="羊母存在性检测器">
+            <div class="lab-top"><span><i class="status-light"></i> YM 存在性检测终端</span><span>DEVICE: YM-000</span></div>
+            <div class="lab-screen">
+              <div class="lab-status" id="labStatus">系统就绪 · 等待观测</div>
+              <div class="lab-value"><b id="labReading">0</b><span>%</span></div>
+              <div class="lab-description" id="labMessage">羊母出现概率</div>
+              <div class="lab-meter"><span></span></div>
+            </div>
+            <div class="lab-footer"><button type="button" id="observeButton" class="primary-button">开始观测</button><span>累计观测 <strong id="observeCount">0</strong> 次</span></div>
+            <div class="lab-result" id="labResult" aria-live="polite">提示：请勿尝试用“什么都没有”作为羊母存在的证明。</div>
+          </div>
           <dialog id="observationAnomaly" class="observation-anomaly" aria-labelledby="anomalyTitle">
             <img src="assets/observations/ym-anomaly.webp" width="960" height="1200" alt="异常影像中的羊母贴近镜头，眼镜背后只剩两点微光。" decoding="async">
             <div class="anomaly-controls">

@@ -278,6 +278,35 @@
   background: #213528;
 }
 
+#labReading { font-weight: inherit; }
+
+body.observation-interference {
+  --bg: #d9cfbf;
+  --ink: #34242a;
+  --green: #74343d;
+  --green2: #7c5055;
+  --muted: #6e5557;
+  --border: #b9a49d;
+  --light: #ede2dd;
+}
+
+.observation-interference .site-header,
+.observation-interference .footer { background: #e8dbd4; }
+
+.observation-interference .main-title,
+.observation-interference .section-heading h2,
+.observation-interference .lab-value { text-shadow: 1px 0 #a5425870, -1px 0 #537b7570; }
+
+body.observation-interference::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, #170c1818 0 1px, transparent 1px 4px);
+  box-shadow: inset 0 0 14vmin #3317246b;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .observation-anomaly[open] > img { animation: anomaly-closeup .16s ease-out both; }
   @keyframes anomaly-closeup {
