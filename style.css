@@ -320,7 +320,7 @@ body[data-observation-phase="registry"]::before {
   bottom: 0;
   width: min(56vw, 24rem);
   aspect-ratio: 4 / 5;
-  background: url("assets/observations/ym-specter.webp") center / cover;
+  background: url("assets/observations/ym-blank-eyes.webp") center / cover;
   mask-image: radial-gradient(ellipse at 70% 70%, #000 14%, transparent 73%);
   opacity: .19;
   pointer-events: none;
